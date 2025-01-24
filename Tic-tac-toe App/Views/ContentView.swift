@@ -19,31 +19,35 @@ struct ContentView: View {
                     CardView(imageName: viewModel.images[index])
                         .frame(width: 96, height: 96)
                         .onTapGesture {
-                            viewModel.counter += 1
-                            viewModel.getImage(at: index)
-                            viewModel.removeImage()
-                            isWin = viewModel.checkWinner()
+                            withAnimation {
+                                viewModel.counter += 1
+                                viewModel.getImage(at: index)
+                                viewModel.removeImage()
+                                isWin = viewModel.checkWinner()
+                            }
                         }
                 }
             }
             .padding([.leading, .trailing], 20)
         } else {
-            VStack {
-                Image(systemName: "crown.fill")
-                    .resizable()
-                    .frame(width: 100, height: 100)
-                    .foregroundStyle(.red)
-                Text("Winner is \(viewModel.winner)")
-                Button("Restart") {
-                    viewModel.resetGame()
-                    isWin = false
+            withAnimation {
+                VStack {
+                    Image(systemName: "crown.fill")
+                        .resizable()
+                        .frame(width: 100, height: 100)
+                        .foregroundStyle(.red)
+                    Text("Winner is \(viewModel.winner)")
+                    Button("Restart") {
+                        viewModel.resetGame()
+                        isWin = false
+                    }
+                    .frame(width: 150, height: 48)
+                    .background(.red)
+                    .cornerRadius(12)
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .padding()
                 }
-                .frame(width: 150, height: 48)
-                .background(.red)
-                .cornerRadius(12)
-                .font(.headline)
-                .foregroundColor(.white)
-                .padding()
             }
         }
     }

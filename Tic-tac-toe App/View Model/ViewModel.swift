@@ -23,7 +23,7 @@ final class ViewModel {
     
     
     func getImage(at index: Int) {
-        if counter % 2 == 0 {
+        if counter % 2 != 0 {
             images[index] = GameModel.x.imageName
             xMarkCounter.append(index)
         } else {
@@ -33,17 +33,17 @@ final class ViewModel {
     }
     
     func removeImage() {
-        if counter % 2 == 0, oMarkCounter.count == 3 {
+        if counter % 2 != 0, oMarkCounter.count == 3 {
             let index = oMarkCounter.removeFirst()
             images[index] = ""
-        } else if counter % 2 != 0, xMarkCounter.count == 3 {
+        } else if counter % 2 == 0, xMarkCounter.count == 3 {
             let index = xMarkCounter.removeFirst()
             images[index] = ""
         }
     }
     
     func checkWinner() -> Bool {
-        let symbol = (counter % 2 == 0) ? GameModel.x.imageName : GameModel.o.imageName
+        let symbol = (counter % 2 != 0) ? GameModel.x.imageName : GameModel.o.imageName
         if isWinning(for: symbol) {
             winner = (symbol == GameModel.x.imageName) ? "X" : "O"
             return true
@@ -65,109 +65,4 @@ final class ViewModel {
             combo.allSatisfy(indices.contains)
         }
     }
-    
-//    func checkWinner() -> Bool {
-//        if counter % 2 == 0 {
-//            if checkXHorizontal() || checkXVertical() || checkXDiagonale() {
-//                winner = "X"
-//                return true
-//            }
-//        } else {
-//            if checkOHorizontal() || checkOVertical() || checkODiagonale() {
-//                winner = "O"
-//                return true
-//            }
-//        }
-//        return false
-//    }
-//    
-//    private func checkXHorizontal() -> Bool {
-//        var indesisy: [Int] = []
-//        
-//        images.enumerated().forEach { item in
-//            if item.element == GameModel.x.imageName {
-//                indesisy.append(item.offset)
-//            }
-//        }
-//        
-//        if indesisy.count == 3, (indesisy[0] == 0 && indesisy[1] == 1 && indesisy[2] == 2 || indesisy[0] == 3 && indesisy[1] == 4 && indesisy[2] == 5 || indesisy[0] == 6 && indesisy[1] == 7 && indesisy[2] == 8) {
-//            return true
-//        }
-//        return false
-//    }
-//    
-//    private func checkOHorizontal() -> Bool {
-//        var indesisy: [Int] = []
-//        
-//        images.enumerated().forEach { item in
-//            if item.element == GameModel.o.imageName {
-//                indesisy.append(item.offset)
-//            }
-//        }
-//        
-//        if indesisy.count == 3, (indesisy[0] == 0 && indesisy[1] == 1 && indesisy[2] == 2 || indesisy[0] == 3 && indesisy[1] == 4 && indesisy[2] == 5 || indesisy[0] == 6 && indesisy[1] == 7 && indesisy[2] == 8) {
-//            return true
-//        }
-//        return false
-//    }
-//    
-//    private func checkXVertical() -> Bool {
-//        var indesisy: [Int] = []
-//        
-//        images.enumerated().forEach { item in
-//            if item.element == GameModel.x.imageName {
-//                indesisy.append(item.offset)
-//            }
-//        }
-//        
-//        if indesisy.count == 3, (indesisy[0] == 0 && indesisy[1] == 3 && indesisy[2] == 6 || indesisy[0] == 1 && indesisy[1] == 4 && indesisy[2] == 7 || indesisy[0] == 2 && indesisy[1] == 5 && indesisy[2] == 8) {
-//            return true
-//        }
-//        return false
-//    }
-//    
-//    private func checkOVertical() -> Bool {
-//        var indesisy: [Int] = []
-//        
-//        images.enumerated().forEach { item in
-//            if item.element == GameModel.o.imageName {
-//                indesisy.append(item.offset)
-//            }
-//        }
-//        
-//        if indesisy.count == 3, (indesisy[0] == 0 && indesisy[1] == 3 && indesisy[2] == 6 || indesisy[0] == 1 && indesisy[1] == 4 && indesisy[2] == 7 || indesisy[0] == 2 && indesisy[1] == 5 && indesisy[2] == 8) {
-//            return true
-//        }
-//        return false
-//    }
-//    
-//    private func checkXDiagonale() -> Bool {
-//        var indesisy: [Int] = []
-//        
-//        images.enumerated().forEach { item in
-//            if item.element == GameModel.x.imageName {
-//                indesisy.append(item.offset)
-//            }
-//        }
-//        
-//        if indesisy.count == 3, (indesisy[0] == 0 && indesisy[1] == 4 && indesisy[2] == 8 || indesisy[0] == 2 && indesisy[1] == 4 && indesisy[2] == 6) {
-//            return true
-//        }
-//        return false
-//    }
-//    
-//    private func checkODiagonale() -> Bool {
-//        var indesisy: [Int] = []
-//        
-//        images.enumerated().forEach { item in
-//            if item.element == GameModel.o.imageName {
-//                indesisy.append(item.offset)
-//            }
-//        }
-//        
-//        if indesisy.count == 3, (indesisy[0] == 0 && indesisy[1] == 4 && indesisy[2] == 8 || indesisy[0] == 2 && indesisy[1] == 4 && indesisy[2] == 6) {
-//            return true
-//        }
-//        return false
-//    }
 }
